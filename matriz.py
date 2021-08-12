@@ -9,9 +9,9 @@ class matriz:
         
     def insertar(self,fila,columna,valor):
         nuevo = Nodo(fila,columna,valor)
-        #insercion encabezado por filas
+ 
         
-        eFila = self.eFilas.getEncabezado()
+        eFila = self.eFilas.getEncabezado(fila)
         if eFila == None:
             eFila = nodoEncabezado(fila)
             eFila.accesoNodo = nuevo
@@ -36,14 +36,14 @@ class matriz:
                     nuevo.izquierda = actual
         
         
-        eColumna = self.eColumnas.getEncabezado()
+        eColumna = self.eColumnas.getEncabezado(columna)
         if eColumna == None:
-            eColumna = nodoEncabezado(fila)
+            eColumna = nodoEncabezado(columna)
             eColumna.accesoNodo = nuevo
-            self.eColumnas.setEncabezado(eFila)
+            self.eColumnas.setEncabezado(eColumna)
         else:
             if nuevo.fila < eColumna.accesoNodo.fila:
-                nuevo.derecha = eColumna.accesoNodo
+                nuevo.abajo = eColumna.accesoNodo
                 eColumna.accesoNodo.arriba = nuevo
                 eColumna.accesoNodo = nuevo
             else: 
@@ -60,19 +60,52 @@ class matriz:
                     actual.abajo = nuevo
                     nuevo.arriba = actual
 
+    def mostrarFilas(self):
+        eFila = self.eFilas.primero
+        print('--------FILAS---------')
+        while eFila != None:
+            
+            actual = eFila.accesoNodo
+            print('\nFila ',actual.fila)
+            print('Columna      Valor')
+            
+            while actual !=None:
+                print(actual.columna,'          ',actual.valor)
+                actual = actual.derecha
+
+            eFila = eFila.siguiente
+            
+        print('---------FIN----------')
+
+    def mostrarColumnas(self):
+  
+        eColumna = self.eColumnas.primero
+        print('--------COLUMNAS---------')
+        while eColumna != None:
+            actual = eColumna.accesoNodo
+            print('\nColumna ',actual.columna)
+            print('Fila      Valor')
+            while(actual != None):
+                print(actual.fila, '        ',actual.valor)
+                actual = actual.abajo
+            eColumna = eColumna.siguiente
+        print('---------FIN----------')
 
 
-m = matriz()
-#Parametros -> fila, columna, valor
-m.insertar(1,0, "Derek")
-m.insertar(2,0, "Luis")
-m.insertar(3,1, "Mario")
-m.insertar(1,1, "Javier")
-m.insertar(0,0, "Federico")
-m.insertar(3,0, "Paco")
-m.insertar(2,2, "Pedro")
 
 
+# m = matriz()
+# #Parametros -> fila, columna, valor
+# m.insertar(1, 0, "adolfo")
+# m.insertar(2, 1, "brandon")
+# m.insertar(0, 1, "daniel")
+# m.insertar(1, 2, "eduardo")
+# m.insertar(0, 2, "diego")
+# m.insertar(0, 0, "javier")
+
+# m.mostrarColumnas()
+# print("")
+# m.mostrarFilas()
 
 
  

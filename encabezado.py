@@ -6,11 +6,13 @@ class listaEncabezado:
     
     def setEncabezado(self,nuevo):
         if self.primero == None:
-            primero = nuevo
+            self.primero = nuevo
+            
         elif nuevo.id < self.primero.id:
             nuevo.siguiente = self.primero
             self.primero.anterior = nuevo
             self.primero = nuevo
+            
         else:
             actual = self.primero
             while actual.siguiente != None:
@@ -22,9 +24,9 @@ class listaEncabezado:
                     break
                 actual = actual.siguiente
                 
-                if actual.siguiente == None:
-                    actual.siguiente = nuevo
-                    nuevo.anterior = actual
+            if actual.siguiente == None:
+                actual.siguiente = nuevo
+                nuevo.anterior = actual
     
     def getEncabezado(self, id):
         actual = self.primero
