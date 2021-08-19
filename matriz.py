@@ -78,7 +78,6 @@ class matriz:
         print('---------FIN----------')
 
     def mostrarColumnas(self):
-  
         eColumna = self.eColumnas.primero
         print('--------COLUMNAS---------')
         while eColumna != None:
@@ -90,7 +89,7 @@ class matriz:
                 actual = actual.abajo
             eColumna = eColumna.siguiente
         print('---------FIN----------')
-
+        
 
 
 
