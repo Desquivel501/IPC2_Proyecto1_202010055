@@ -8,32 +8,31 @@ from ruta import *
 
 text = ""
 
-m = matriz()
 
 def leer():
     filename = askopenfilename()
     tree = ET.parse(filename)
     root = tree.getroot()
     
+    
     for elemento in root.findall("terreno"):
+        m = matriz()
+        for i in elemento.findall("posicioninicio"):
+            inicio_x = i.find("x").text
+            inicio_y = i.find("y").text
+        
+        for j in elemento.findall("posicionfin"):
+            fin_x = j.find("x").text
+            fin_y = j.find("y").text
+        
         for subelemento in elemento.findall("posicion"):
             val_x = subelemento.attrib["x"]
             val_y = subelemento.attrib["y"]
             val = subelemento.text
             m.insertar(val_y, val_x, val)
-        break
-            
-    # m.mostrarColumnas()
-    # m.mostrarFilas()
-    
-    r = Ruta(5,5,1,1,m)
-    r.buscar()
-
-    # actual = m.eColumnas.primero
-    # t = actual.accesoNodo
-    # print(t.fila)
-    # h = t.abajo
-    # l = h.abajo
-    # print(l.valor, l.fila, l.columna)
+       
+        r = Ruta(inicio_x, inicio_y, fin_x, fin_y, m)
+        r.buscar()          
+  
 
 leer()
