@@ -7,6 +7,7 @@ class Nodo:
         self.izquierda = None
         self.arriba = None
         self.abajo = None
+        self.visitado = False
         
 class nodoEncabezado:
     def __init__(self,id):

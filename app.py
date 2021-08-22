@@ -32,7 +32,8 @@ def leer():
             m.insertar(val_y, val_x, val)
        
         r = Ruta(inicio_x, inicio_y, fin_x, fin_y, m)
-        r.buscar()          
+        r.buscar()         
+       
   
 
 leer()

@@ -4,6 +4,7 @@ class nodoRuta:
         self.sig = None
         self.x = x
         self.y = y
+        self.visitado = False
 
 class ListaRuta:
     def __init__(self):
