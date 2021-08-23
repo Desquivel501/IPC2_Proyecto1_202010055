@@ -45,7 +45,11 @@ class Ruta:
         lista = PQ.PriorityQueue()
         lista_ruta = LL.LinkedList()
         cont = 0
+<<<<<<< Updated upstream
         while (nodo_actual.fila != self.final_y) and (nodo_actual.columna != self.final_x):
+=======
+        while (nodo_actual.fila != self.final_y) or (nodo_actual.columna != self.final_x):
+>>>>>>> Stashed changes
             if cont == 20:
                 break
         
@@ -80,9 +84,15 @@ class Ruta:
                 while aux is not None:
                     lista.push(aux)
                     aux = aux.sig
+<<<<<<< Updated upstream
             nodo_actual.visitado = True
             nodo_actual = lista.pop()
             lista_ruta.insertar(nodo_actual)
+=======
+                nodo_actual.visitado = True
+                nodo_actual = lista.pop()
+                lista_ruta.insertar(nodo_actual)
+>>>>>>> Stashed changes
             cont += 1
             print(nodo_actual.columna, nodo_actual.fila)
                                           
