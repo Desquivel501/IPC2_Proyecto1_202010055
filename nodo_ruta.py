@@ -19,6 +19,8 @@ class ListaRuta:
             printval = printval.sig
         print("")
         print("Gasolina usada: " + str(gasolina))
+        print("")
+        print("")
     
     def insertar(self, valor_nuevo):
         nuevo = nodoRuta(valor_nuevo.valor, valor_nuevo.columna, valor_nuevo.fila)

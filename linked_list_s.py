@@ -1,4 +1,4 @@
-class Node:
+class NodeLL:
     def __init__(self, valor = None ):
         self.valor = valor
         self.sig = None
@@ -14,7 +14,7 @@ class LinkedList:
             printval = printval.sig
     
     def insertar(self, valor_nuevo):
-        nuevo = Node(valor_nuevo)
+        nuevo = NodeLL(valor_nuevo)
         if self.head == None:
             self.head = nuevo
             return
