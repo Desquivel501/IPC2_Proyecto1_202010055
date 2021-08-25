@@ -35,7 +35,7 @@ class ListaRuta:
         temp = self.head
         existe = False
         while temp is not None:
-            if temp.valor.columna == valor_nuevo.columna and temp.valor.fila == valor_nuevo.fila:
+            if int(temp.valor.columna) == int(valor_nuevo.columna) and int(temp.valor.fila) == int(valor_nuevo.fila):
                 existe = True
                 break
             temp = temp.sig
@@ -57,7 +57,7 @@ class ListaRuta:
     def buscarPeso(self, nodo):
         aux = self.head
         while aux is not None:
-            if aux.valor.columna == nodo.columna and aux.valor.fila == nodo.fila:
+            if int(aux.valor.columna) == int(nodo.columna) and int(aux.valor.fila) == int(nodo.fila):
                 break
             aux = aux.sig
         peso = aux.peso
@@ -66,7 +66,7 @@ class ListaRuta:
     def existe(self, nodo):
         aux = self.head
         while aux is not None:
-            if aux.valor.columna == nodo.columna and aux.valor.fila == nodo.fila:
+            if int(aux.valor.columna) == int(nodo.columna) and int(aux.valor.fila) == int(nodo.fila):
                 return True
             aux = aux.sig
         return False
@@ -83,7 +83,7 @@ class ListaRuta:
     def buscarAnterior(self, nodo):
         aux = self.head
         while aux is not None:
-            if aux.valor.columna == nodo.columna and aux.valor.fila == nodo.fila:
+            if int(aux.valor.columna) == int(nodo.columna) and int(aux.valor.fila) == int(nodo.fila):
                 return aux.anterior
             aux = aux.sig
         return None

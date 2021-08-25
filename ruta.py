@@ -1,7 +1,5 @@
 import nodo_ruta as NR
 import linked_list_s as LL
-import math
-import priority_queue as PQ
 
 class Ruta:
     
@@ -16,9 +14,14 @@ class Ruta:
         self.lim_y = lim_y
         
     def buscar(self):
+        print("--------------------------------------------")
         print("Terreno: ", self.nombre) 
         print("Inicio", "x = ",self.inicio_x,"  ","y = ", self.inicio_y)
         print("Final" , "x = ",self.final_x,"  ","y = ", self.final_y)
+        print("--------------------------------------------")
+        
+        self.inicio_x , self.final_x = self.final_x, self.inicio_x
+        self.inicio_y , self.final_y = self.final_y, self.inicio_y
        
         eColumna = self.matriz.eColumnas.primero
         eFila = self.matriz.eFilas.primero
@@ -52,6 +55,9 @@ class Ruta:
             caminos_disponibles = LL.LinkedList()
             peso_a_nodo_actual = lista_ruta.buscarPeso(nodo_actual)
             
+            if nodo_actual.arriba != None:
+                caminos_disponibles.insertar(nodo_actual.arriba)
+            
             if nodo_actual.derecha != None:
                 caminos_disponibles.insertar(nodo_actual.derecha)
 
@@ -61,9 +67,7 @@ class Ruta:
             if nodo_actual.izquierda != None:
                 caminos_disponibles.insertar(nodo_actual.izquierda)
                 
-            if nodo_actual.arriba != None:
-                caminos_disponibles.insertar(nodo_actual.arriba)
-                   
+            
             aux = caminos_disponibles.head
             
             while aux is not None:
@@ -89,9 +93,10 @@ class Ruta:
         ruta_final = LL.LinkedList()
         while nodo_actual is not None:
             ruta_final.insertar(nodo_actual)
+            nodo_actual.valido = True
             nodo_anterior = lista_ruta.buscarAnterior(nodo_actual)
             nodo_actual = nodo_anterior
 
         
-        ruta_final.imprimir()
+        ruta_final.imprimir(self.matriz)
             

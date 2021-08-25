@@ -18,41 +18,37 @@ def leer(filename):
     
     return root
 
-def procesar(root):
+def procesar(root, nombre_terreno):
     for elemento in root.findall("terreno"):
-        nombre = elemento.attrib["nombre"]
-        lim_x =  elemento.attrib["n"]
-        lim_y =  elemento.attrib["m"]
-        m = matriz()
-        for i in elemento.findall("posicioninicio"):
-            inicio_x = i.find("x").text
-            inicio_y = i.find("y").text
+        if (nombre_terreno) == elemento.attrib["nombre"]: 
+            nombre = elemento.attrib["nombre"]
+            lim_x =  elemento.attrib["n"]
+            lim_y =  elemento.attrib["m"]
+            m = matriz()
+            for i in elemento.findall("posicioninicio"):
+                inicio_x = i.find("x").text
+                inicio_y = i.find("y").text
+            
+            for j in elemento.findall("posicionfin"):
+                fin_x = j.find("x").text
+                fin_y = j.find("y").text
+            
+            for subelemento in elemento.findall("posicion"):
+                val_x = subelemento.attrib["x"]
+                val_y = subelemento.attrib["y"]
+                val = subelemento.text
+                m.insertar(int(val_y), int(val_x), val)
         
-        for j in elemento.findall("posicionfin"):
-            fin_x = j.find("x").text
-            fin_y = j.find("y").text
-        
-        for subelemento in elemento.findall("posicion"):
-            val_x = subelemento.attrib["x"]
-            val_y = subelemento.attrib["y"]
-            val = subelemento.text
-            m.insertar(val_y, val_x, val)
-       
-        # try:
-        #     r = Ruta(inicio_x, inicio_y, fin_x, fin_y, m, nombre, int(lim_x)-1, int(lim_y)-1)
-        #     aux = r.buscar()
-        #     terrenos.insertar(aux)
-        # except Exception as e:
-        #     print("ERROR: Ha ocurrido un error al procesar el terreno")      
-        #     print(e)
-        #     print("") 
-        
-        r = Ruta(inicio_x, inicio_y, fin_x, fin_y, m, nombre, int(lim_x)-1, int(lim_y)-1)
-        aux = r.buscar()
-        terrenos.insertar(aux)
-        
-       
+            try:
+                r = Ruta(int(inicio_x), int(inicio_y), int(fin_x), int(fin_y), m, nombre, int(lim_x)-1, int(lim_y)-1)
+                aux = r.buscar()
+                terrenos.insertar(aux)
 
+            except Exception as e:
+                print("ERROR: Ha ocurrido un error al procesar el terreno")      
+                print(e)
+                print("") 
+        
 archivo_cargado = False
 
 while(True):
@@ -88,8 +84,8 @@ while(True):
         #     print("ERROR: Ha ocurrido un error al procesar el archivo")
         #     print(e)
         #     print("")
-        
-        procesar(root)
+        nombre = input("Ingrese el nombre del terreno a procesar: ")
+        procesar(root, nombre)
                
     elif res == "3" and archivo_cargado:
         try:

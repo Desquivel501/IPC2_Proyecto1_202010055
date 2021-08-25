@@ -1,3 +1,7 @@
+import time
+import matriz
+from colorama import Fore, Back, Style
+
 class NodeLL:
     def __init__(self, valor = None ):
         self.valor = valor
@@ -6,12 +10,6 @@ class NodeLL:
 class LinkedList:
     def __init__(self):
         self.head = None
-    
-    # def imprimir(self):
-    #     printval = self.head
-    #     while printval != None:
-    #         print(printval.valor)
-    #         printval = printval.sig
     
     def insertar(self, valor_nuevo):
         nuevo = NodeLL(valor_nuevo)
@@ -37,17 +35,44 @@ class LinkedList:
             aux = aux.sig
         return menor.valor.valor
     
-    def imprimir(self):
+    def imprimir(self, matriz):
         printval = self.head
         gasolina = 0
+        print("--------------------------------------------")
+        print("||       CALCULANDO LA MEJOR RUTA         ||")
+        print("--------------------------------------------")
+        time.sleep(0.7)
         while printval != None:
-            print("X: " + printval.valor.columna + "    " + "Y: " + printval.valor.fila + "    " + "GAS: " + printval.valor.valor)
+            print("X: " + str(printval.valor.columna) + "    " + "Y: " + str(printval.valor.fila) + "    " + "GAS: " + str(printval.valor.valor))
             gasolina += int(printval.valor.valor)
             printval = printval.sig
         print("")
+        print("--------------------------------------------")
+        print("||     CALCULANDO COMBUSTIBLE USADO       ||")
+        print("--------------------------------------------")
+        time.sleep(0.5)
         print("Gasolina usada: " + str(gasolina))
         print("")
-        print("")
+        
+        print("--------------------------------------------")
+        print("||             CAMINO USADO               ||")
+        print("--------------------------------------------")
+        time.sleep(0.5)
+        
+        eFila = matriz.eFilas.primero
+        if eFila == None:
+            print("ERROR: Matriz Vacia")
+            
+        while eFila != None:
+            actual = eFila.accesoNodo 
+            while actual != None:
+                if actual.valido:
+                    print(Fore.BLUE + "| 1 |" + Style.RESET_ALL,  end=" " )
+                else:
+                    print("| 0 |", end=" ")
+                actual = actual.derecha
+            eFila = eFila.siguiente
+            print("")
         
     
     def print(self):

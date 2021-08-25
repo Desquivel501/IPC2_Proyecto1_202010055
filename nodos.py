@@ -8,6 +8,7 @@ class Nodo:
         self.arriba = None
         self.abajo = None
         self.visitado = False
+        self.valido = False
         
 class nodoEncabezado:
     def __init__(self,id):
