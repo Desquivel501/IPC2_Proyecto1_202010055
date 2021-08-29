@@ -1,0 +1,26 @@
+<terreno nombre="Matrix_2" n="12" m="9">
+  <posicionInicio>
+    <x>7</x>
+    <y>8</y>
+  </posicionInicio>
+  <posicionFinal>
+    <x>1</x>
+    <y>0</y>
+  </posicionFinal>
+  <combustible>80</combustible>
+  <posicion x="1" y="0">17</posicion>
+  <posicion x="2" y="0">0</posicion>
+  <posicion x="2" y="1">0</posicion>
+  <posicion x="2" y="2">6</posicion>
+  <posicion x="2" y="3">3</posicion>
+  <posicion x="2" y="4">2</posicion>
+  <posicion x="3" y="4">2</posicion>
+  <posicion x="3" y="5">8</posicion>
+  <posicion x="3" y="6">10</posicion>
+  <posicion x="3" y="7">5</posicion>
+  <posicion x="4" y="7">6</posicion>
+  <posicion x="5" y="7">9</posicion>
+  <posicion x="6" y="7">5</posicion>
+  <posicion x="7" y="7">5</posicion>
+  <posicion x="7" y="8">2</posicion>
+</terreno>

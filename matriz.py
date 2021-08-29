@@ -1,15 +1,18 @@
 from nodos import Nodo, nodoEncabezado
 from encabezado import listaEncabezado
+import graphviz
+import os
+from pathlib import Path
 
 class matriz:
     
-    def __init__(self):
+    def __init__(self, nombre):
+        self.nombre = nombre
         self.eFilas = listaEncabezado()
         self.eColumnas = listaEncabezado()
         
     def insertar(self,fila,columna,valor):
         nuevo = Nodo(fila,columna,valor)
- 
         
         eFila = self.eFilas.getEncabezado(fila)
         if eFila == None:
@@ -93,18 +96,57 @@ class matriz:
 
 
 
-# m = matriz()
-# #Parametros -> fila, columna, valor
-# m.insertar(1, 0, "adolfo")
-# m.insertar(2, 1, "brandon")
-# m.insertar(0, 1, "daniel")
-# m.insertar(1, 2, "eduardo")
-# m.insertar(0, 2, "diego")
-# m.insertar(0, 0, "javier")
+    def renderizar(self):
 
-# m.mostrarColumnas()
-# print("")
-# m.mostrarFilas()
+        eFila = self.eFilas.primero
+        
+        graphviz = '''
+        digraph L{
+            node[shape=box fillcolor="#91d1c9" style =filled shape=ellipse]
+
+            subgraph cluster_p{
+                label= " ''' + self.nombre +  ''' "
+                bgcolor = "#0C6399"
+                edge[dir = "both"]
+                
+                '''
+        contGrupo = 1
+        contFila = 1
+        while eFila is not None:
+            actual = eFila.accesoNodo
+            ancla = "nodo"+str(actual.columna)+"_"+str(actual.fila)
+            while actual is not None:
+                graphviz += '''nodo'''+str(actual.columna)+'''_'''+str(actual.fila)+'''[label = "'''+str(actual.valor)+'''", group='''+str(contGrupo)+ ''']\n'''
+                if contGrupo !=  1:
+                    graphviz += "nodo"+str(actual.columna-1)+"_"+str(actual.fila)+"->"+"nodo"+str(actual.columna)+"_"+str(actual.fila)+"\n"
+                    graphviz += '''{rank=same; '''+ str(ancla) +''';nodo'''+str(actual.columna) +'''_'''+str(actual.fila) +'''}\n'''
+                
+                if contFila != 1:
+                    graphviz += "nodo"+str(actual.columna)+"_"+str(actual.fila-1)+"->"+"nodo"+str(actual.columna)+"_"+str(actual.fila)+"\n"
+                    
+                contGrupo += 1
+                actual = actual.derecha
+            contGrupo = 1
+            contFila+=1
+            eFila = eFila.siguiente
+                
+        graphviz += '''        
+            }
+        }
+        '''
+        
+        archivo = open('grafico.dot',"w+")
+        archivo.write(graphviz)
+        print("Archivo generado en: ", os.getcwd())
+        archivo.close()
+
+        os.system('dot -Tpng grafico.dot -o grafico.png')
+    
+
+
+
+        
+
 
 
  

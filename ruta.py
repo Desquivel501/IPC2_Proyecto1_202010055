@@ -3,22 +3,19 @@ import linked_list_s as LL
 
 class Ruta:
     
-    def __init__(self, inicio_x, inicio_y, final_x, final_y, matriz,nombre, lim_x, lim_y):
+    def __init__(self, inicio_x, inicio_y, final_x, final_y, matriz, filas, columnas, tipo, path):
         self.inicio_x = inicio_x
         self.inicio_y = inicio_y
         self.final_x = final_x
         self.final_y = final_y
         self.matriz = matriz
-        self.nombre = nombre
-        self.lim_x = lim_x
-        self.lim_y = lim_y
+        self.nombre = matriz.nombre
+        self.tipo = tipo
+        self.filas = filas
+        self.columnas = columnas
+        self.path = path
         
     def buscar(self):
-        print("--------------------------------------------")
-        print("Terreno: ", self.nombre) 
-        print("Inicio", "x = ",self.inicio_x,"  ","y = ", self.inicio_y)
-        print("Final" , "x = ",self.final_x,"  ","y = ", self.final_y)
-        print("--------------------------------------------")
         
         self.inicio_x , self.final_x = self.final_x, self.inicio_x
         self.inicio_y , self.final_y = self.final_y, self.inicio_y
@@ -37,8 +34,7 @@ class Ruta:
                         out = True
                         break
                     actual = actual.abajo
-            eColumna = eColumna.siguiente
-               
+            eColumna = eColumna.siguiente    
         inicial = actual
         
         inicial.visitado = True
@@ -46,14 +42,13 @@ class Ruta:
         
         lista_ruta = NR.ListaRuta()
         lista_ruta.insertar(nodo_actual,None,nodo_actual.valor)
-        visitado = LL.LinkedList()
         
         while (nodo_actual.fila != self.final_y) or (nodo_actual.columna != self.final_x):     
 
             nodo_actual.visitado = True
-            visitado.insertar(nodo_actual)
-            caminos_disponibles = LL.LinkedList()
             peso_a_nodo_actual = lista_ruta.buscarPeso(nodo_actual)
+            
+            caminos_disponibles = LL.LinkedList()
             
             if nodo_actual.arriba != None:
                 caminos_disponibles.insertar(nodo_actual.arriba)
@@ -85,6 +80,7 @@ class Ruta:
               
             
             if siguientes_caminos.vacia():
+                print("ERROR: Camino no posible")
                 return "Not Posible"
             
                        
@@ -98,5 +94,16 @@ class Ruta:
             nodo_actual = nodo_anterior
 
         
-        ruta_final.imprimir(self.matriz)
+        if self.tipo == "imprimir":
+            print("--------------------------------------------")
+            print("Terreno: ", self.nombre) 
+            print("Inicio", "x = ",self.inicio_x,"  ","y = ", self.inicio_y)
+            print("Final" , "x = ",self.final_x,"  ","y = ", self.final_y)
+            print("--------------------------------------------")
+            ruta_final.imprimir(self.matriz)
+            
+        elif self.tipo == "xml":
+            ruta_final.reporte(self.nombre, self.inicio_x, self.inicio_y, self.final_x, self.final_y, self.filas, self.columnas, self.path)
+        
+        return ruta_final
             

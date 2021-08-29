@@ -2,6 +2,9 @@ import time
 import matriz
 from colorama import Fore, Back, Style
 
+from lxml import etree
+
+
 class NodeLL:
     def __init__(self, valor = None ):
         self.valor = valor
@@ -74,11 +77,60 @@ class LinkedList:
             eFila = eFila.siguiente
             print("")
         
-    
-    def print(self):
+    def reporte(self, nombre, inicio_x, inicio_y, final_x, final_y,filas, columnas, path):
+        root = etree.Element('terreno')
+        tree = etree.ElementTree(root)
+        root.set('nombre',nombre)
+        root.set('n',str(columnas))
+        root.set('m',str(filas))
+        
+        posicionInicio = etree.Element('posicionInicio')
+        root.append(posicionInicio)
+        xInicio = etree.Element('x')
+        xInicio.text = str(inicio_x)
+        yInicio = etree.Element('y')
+        yInicio.text = str(inicio_y)
+        posicionInicio.append(xInicio)
+        posicionInicio.append(yInicio)
+        
+        posicionFinal = etree.Element('posicionFinal')
+        root.append(posicionFinal)
+        xFinal = etree.Element('x')
+        xFinal.text = str(final_x)
+        yFinal = etree.Element('y')
+        yFinal.text = str(final_y)
+        posicionFinal.append(xFinal)
+        posicionFinal.append(yFinal)
+        
+        combustible = etree.Element("combustible")
+        root.append(combustible)
         aux = self.head
+        gasolina = 0
         while aux != None:
-            print("X: " + aux.valor.valor.columna + "    " + "Y: " + aux.valor.valor.fila + "    " + "GAS: " + aux.valor.valor.valor)
-            aux = aux.sig
+            gasolina += int(aux.valor.valor)
+            aux = aux.sig 
+        combustible.text = str(gasolina)
+        
+        aux = self.head
+
+        while aux != None:
+            posicion = etree.Element("posicion")
+            posicion.set('x',str(aux.valor.columna))
+            posicion.set('y',str(aux.valor.fila))
+            posicion.text = str(aux.valor.valor)
+            root.append(posicion)
+            aux = aux.sig 
+            
+        filename = path
+        
+        try:
+            tree.write(filename, pretty_print=True)
+            print("El archivo se ha generado exitosamente")
+        except Exception as e:
+            print("ERROR: ",e)
+        
+
+            
+    
 
         
