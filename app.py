@@ -5,7 +5,6 @@ from encabezado import *
 from matriz import *
 from ruta import *
 import linked_list_s as LL
-from graphviz import Source
 
 terrenos = LL.LinkedList()
 text = ""

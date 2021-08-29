@@ -12,18 +12,6 @@ class ListaRuta:
     def __init__(self):
         self.head = None
     
-    # def imprimir(self):
-    #     printval = self.head
-    #     gasolina = 0
-    #     while printval != None:
-    #         print("X: " + printval.x + "    " + "Y: " + printval.y + "    " + "GAS: " + printval.valor)
-    #         gasolina += int(printval.valor)
-    #         printval = printval.sig
-    #     print("")
-    #     print("Gasolina usada: " + str(gasolina))
-    #     print("")
-    #     print("")
-    
     def imprimir(self):
         aux = self.head
         while aux != None:

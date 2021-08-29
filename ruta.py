@@ -74,8 +74,7 @@ class Ruta:
                     if int(peso_menor_actual) > int(peso):
                         lista_ruta.insertar(aux.valor,nodo_actual,peso)
                 aux = aux.sig 
-            
-            #lista_ruta.imprimir()
+
             siguientes_caminos = lista_ruta.noVisitados()
               
             

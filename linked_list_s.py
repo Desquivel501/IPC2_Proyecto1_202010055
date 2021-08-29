@@ -1,5 +1,4 @@
 import time
-import matriz
 from colorama import Fore, Back, Style
 
 from lxml import etree
@@ -83,17 +82,8 @@ class LinkedList:
         root.set('nombre',nombre)
         root.set('n',str(columnas))
         root.set('m',str(filas))
-        
-        posicionInicio = etree.Element('posicionInicio')
-        root.append(posicionInicio)
-        xInicio = etree.Element('x')
-        xInicio.text = str(inicio_x)
-        yInicio = etree.Element('y')
-        yInicio.text = str(inicio_y)
-        posicionInicio.append(xInicio)
-        posicionInicio.append(yInicio)
-        
-        posicionFinal = etree.Element('posicionFinal')
+
+        posicionFinal = etree.Element('posicionInicio')
         root.append(posicionFinal)
         xFinal = etree.Element('x')
         xFinal.text = str(final_x)
@@ -101,6 +91,15 @@ class LinkedList:
         yFinal.text = str(final_y)
         posicionFinal.append(xFinal)
         posicionFinal.append(yFinal)
+        
+        posicionInicio = etree.Element('posicionFinal')
+        root.append(posicionInicio)
+        xInicio = etree.Element('x')
+        xInicio.text = str(inicio_x)
+        yInicio = etree.Element('y')
+        yInicio.text = str(inicio_y)
+        posicionInicio.append(xInicio)
+        posicionInicio.append(yInicio)
         
         combustible = etree.Element("combustible")
         root.append(combustible)
@@ -121,7 +120,7 @@ class LinkedList:
             root.append(posicion)
             aux = aux.sig 
             
-        filename = path
+        filename = path + "/" + nombre + ".xml"
         
         try:
             tree.write(filename, pretty_print=True)

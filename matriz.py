@@ -1,8 +1,6 @@
 from nodos import Nodo, nodoEncabezado
 from encabezado import listaEncabezado
-import graphviz
 import os
-from pathlib import Path
 
 class matriz:
     
@@ -80,6 +78,7 @@ class matriz:
             
         print('---------FIN----------')
 
+
     def mostrarColumnas(self):
         eColumna = self.eColumnas.primero
         print('--------COLUMNAS---------')
@@ -93,9 +92,7 @@ class matriz:
             eColumna = eColumna.siguiente
         print('---------FIN----------')
         
-
-
-
+        
     def renderizar(self):
 
         eFila = self.eFilas.primero
@@ -134,10 +131,10 @@ class matriz:
             }
         }
         '''
-        
+
         archivo = open('grafico.dot',"w+")
         archivo.write(graphviz)
-        print("Archivo generado en: ", os.getcwd())
+        print("Archivo generado en: ", os.getcwd() +"\\grafico.png")
         archivo.close()
 
         os.system('dot -Tpng grafico.dot -o grafico.png')
